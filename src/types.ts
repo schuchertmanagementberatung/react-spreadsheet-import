@@ -129,6 +129,7 @@ export type RowHook<T extends string> = (
 export type TableHook<T extends string> = (
   table: Data<T>[],
   addError: (rowIndex: number, fieldKey: T, error: Info) => void,
+  clearErrors: () => void,
 ) => Data<T>[] | Promise<Data<T>[]>
 
 export type ErrorLevel = "info" | "warning" | "error"

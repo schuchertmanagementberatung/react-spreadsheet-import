@@ -19,8 +19,16 @@ export const addErrorsAndRunHooks = async <T extends string>(
     }
   }
 
+  const clearErrors = () => {
+    changedRowIndexes = data.length > 0 ? Array.from({ length: data.length }, (_, i) => i) : []
+  }
+
   if (tableHook) {
-    data = await tableHook(data, (...props) => addError(ErrorSources.Table, ...props))
+    data = await tableHook(
+      data,
+      (...props) => addError(ErrorSources.Table, ...props),
+      () => clearErrors(),
+    )
   }
 
   if (rowHook) {
